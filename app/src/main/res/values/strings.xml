@@ -5,6 +5,7 @@
     <string name="emailHint">Email</string>
     <string name="passwordHint">Password</string>
     <string name="loginButtonText">Sign In</string>
+    <string name="registerButtonText">Register</string>
     <string name="emailError">Invalid Email</string>
     <string name="passwordError">Empty Password</string>
     <string name="titleWelcome">Welcome!</string>

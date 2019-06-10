@@ -1,6 +1,7 @@
 package com.example.apptienda
 
 import android.app.Activity
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -12,6 +13,7 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
         setListeners()
+        goToRegisterActivity()
     }
 
     private fun setListeners() {
@@ -37,6 +39,14 @@ class LoginActivity : AppCompatActivity() {
                     finish()
                 }
             }
+        }
+    }
+
+    private fun goToRegisterActivity(){
+        registerButton.setOnClickListener {
+            startActivityForResult(
+                Intent(this, RegisterActivity::class.java),
+                RequestCode.GO_TO_REGISTER_FROM_LOGIN_ACTIVITY.value)
         }
     }
 
