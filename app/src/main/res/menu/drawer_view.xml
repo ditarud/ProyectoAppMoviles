@@ -7,7 +7,7 @@
                 android:title="@string/navigation_drawer_my_profile" />
         <item
                 android:id="@+id/products"
-                android:icon="@drawable/ic_shop"
+                android:icon="@drawable/ic_shop2"
                 android:title="@string/navigation_drawer_products" />
         <item
                 android:id="@+id/shoppingHistory"

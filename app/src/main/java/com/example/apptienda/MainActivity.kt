@@ -35,6 +35,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupNavViewListener() {
+        navView.setItemIconTintList(null)
         navView.setNavigationItemSelectedListener { menuItem ->
             // set item as selected to persist highlight
             menuItem.isChecked = true

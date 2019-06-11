@@ -53,7 +53,7 @@
                         android:layout_height="wrap_content"
                         android:id="@+id/amountPaidTextView"
                         android:layout_toEndOf="@+id/productPhotoImageView"
-                        android:layout_below="@+id/productNameTextView"
+                        android:layout_below="@+id/orderDateTextView"
                 />
 
             </RelativeLayout>
