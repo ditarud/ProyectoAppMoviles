@@ -29,4 +29,14 @@
     <string name="navigation_drawer_my_profile">My Profile</string>
     <string name="navigation_drawer_shopping_history">Shopping History</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- ACTION BAR -->
+    <string name="action_bar_products_title">Products</string>
+    <string name="action_bar_my_profile_title">My Profile</string>
+    <string name="action_bar_shopping_history_title">Shopping History</string>
+    <string name="action_bar_others_complaints_title">Others Complaints</string>
+    <string name="action_bar_complaints_summary_title">Complaints Summary</string>
+
 </resources>

@@ -3,11 +3,14 @@ package com.example.apptienda
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v4.app.Fragment
 import android.support.v4.view.GravityCompat
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
+    private var currentLoadedFragment: Fragment? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,6 +45,16 @@ class MainActivity : AppCompatActivity() {
             // For example, swap UI fragments here
             val transaction = supportFragmentManager.beginTransaction()
             when (menuItem.itemId) {
+
+                R.id.shoppingHistory -> {
+                    val shoppingFragment = supportFragmentManager.findFragmentByTag("shoppingHistoryFrag")
+                    if (shoppingFragment != null) {
+                        transaction.replace(R.id.contentFrameLayout, shoppingFragment)
+                    } else {
+                        transaction.replace(R.id.contentFrameLayout, ShoppingHistoryFragment(), "shoppingHistoryFrag")
+                    }
+                    supportActionBar!!.title = getString(R.string.action_bar_shopping_history_title)
+                }
 
                 R.id.signOut -> {
                     onSignOut()
