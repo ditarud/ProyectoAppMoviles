@@ -1,16 +1,12 @@
-package com.example.apptienda
+package com.example.apptienda.Fragments
 
-import android.content.Context
-import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_shopping_history.*
-import android.graphics.BitmapFactory
-import android.graphics.Bitmap
-import java.net.URL
+import com.example.apptienda.R
 
 
 class ShoppingHistoryFragment : Fragment() {

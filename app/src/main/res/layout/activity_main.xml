@@ -29,6 +29,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
 
+        <TextView
+                android:id="@+id/loggedAsTextView"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginLeft="300dp"
+                android:textSize="10dp"
+
+
+        />
+
     </RelativeLayout>
 
     <!-- Container for contents of drawer - use NavigationView to make configuration easier -->

@@ -13,6 +13,7 @@
     <!-- REGISTER ACTIVITY -->
     <string name="title">Register for Shop App</string>
     <string name="userNameText">Name</string>
+    <string name="lastNameText">Lastname</string>
     <string name="passwordText">Password</string>
     <string name="emailText">Email</string>
     <string name="genderText">Gender</string>
@@ -20,8 +21,6 @@
     <string name="femaleText">Female</string>
     <string name="addressText">Female</string>
     <string name="confirmButton">Confirm</string>
-
-
 
 
     <!-- NAVIGATION DRAWER -->

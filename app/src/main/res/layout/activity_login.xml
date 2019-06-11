@@ -12,7 +12,7 @@
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/emailEditText"
+            app:layout_constraintBottom_toTopOf="@+id/emailEdit"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintVertical_chainStyle="packed"
@@ -23,7 +23,7 @@
             android:maxWidth="200dp"  />
 
     <EditText
-            android:id="@+id/emailEditText"
+            android:id="@+id/emailEdit"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
@@ -40,7 +40,7 @@
             android:id="@+id/passwordEditText"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/emailEditText"
+            app:layout_constraintTop_toBottomOf="@+id/emailEdit"
             app:layout_constraintBottom_toTopOf="@+id/loginButton"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

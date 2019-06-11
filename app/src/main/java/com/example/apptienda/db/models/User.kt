@@ -9,6 +9,7 @@ import android.support.annotation.NonNull
 data class User(
     @NonNull @ColumnInfo(name = "name") val name: String?,
     @NonNull @ColumnInfo(name = "lastname") val lastname: String?,
+    @NonNull @ColumnInfo(name = "address") val address: String?,
     @NonNull @ColumnInfo(name = "role") val role: Boolean?,
     @NonNull @ColumnInfo(name = "email") val email: String?,
     @NonNull @ColumnInfo(name = "password") val password: String?,

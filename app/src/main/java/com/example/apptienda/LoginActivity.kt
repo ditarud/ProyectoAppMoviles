@@ -4,26 +4,52 @@ import android.app.Activity
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
+import com.example.apptienda.db.AppDatabase
 import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class LoginActivity : AppCompatActivity() {
+
+    var userEmailDB = ""
+    val userList: MutableList<String> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+        checkUserExist()
         setListeners()
         goToRegisterActivity()
     }
 
+
+
+    private fun checkUserExist() : MutableList<String>{
+        GlobalScope.launch(Dispatchers.IO) {
+            // replaces doAsync (runs on another thread)
+            for (i in 0..AppDatabase.getDatabase(applicationContext).userDao().getAllUser().count() - 1) {
+                userEmailDB = AppDatabase.getDatabase(applicationContext).userDao().getAllUser()[i].email.toString()
+                userList.add(userEmailDB)
+
+            }
+        }
+        return userList
+
+    }
+
     private fun setListeners() {
         loginButton.setOnClickListener {
-            val userEmail = emailEditText.text.toString()
+            val userEmail = emailEdit.text.toString()
             val userPassword = passwordEditText.text.toString()
             when {
                 // Check Email
-                !EmailValidator.isValidEmail(userEmail) ->
+                !EmailValidator.isValidEmail(userEmail)  ->
                     Toast.makeText(this, R.string.emailError, Toast.LENGTH_LONG).show()
+                userEmail  !in checkUserExist() ->
+                    Toast.makeText(this, "Usuario no registrado", Toast.LENGTH_LONG).show()
                 // Check Password
                 userPassword.isNullOrEmpty() ->
                     Toast.makeText(this, R.string.passwordError, Toast.LENGTH_LONG).show()

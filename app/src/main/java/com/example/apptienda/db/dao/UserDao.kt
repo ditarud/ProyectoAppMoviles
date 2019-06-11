@@ -7,8 +7,11 @@ import com.example.apptienda.db.models.User
 
 @Dao
 interface UserDao {
-    @Query("SELECT * FROM users WHERE id LIKE :id")
-    fun getUser(id: Int): User?
+    @Query("SELECT * FROM users WHERE email LIKE :email")
+    fun getUser(email: String): User?
+
+    @Query("SELECT * FROM users")
+    fun getAllUser() : List<User>
 
     @Insert(onConflict = OnConflictStrategy.FAIL)
     fun insert(user: User)
