@@ -10,6 +10,19 @@
     <string name="passwordError">Empty Password</string>
     <string name="titleWelcome">Welcome!</string>
 
+    <!-- REGISTER ACTIVITY -->
+    <string name="title">Register for Shop App</string>
+    <string name="userNameText">Name</string>
+    <string name="passwordText">Password</string>
+    <string name="emailText">Email</string>
+    <string name="genderText">Gender</string>
+    <string name="maleText">Male</string>
+    <string name="femaleText">Female</string>
+    <string name="addressText">Female</string>
+    <string name="confirmButton">Confirm</string>
+
+
+
 
     <!-- NAVIGATION DRAWER -->
     <string name="navigation_drawer_products">Products</string>

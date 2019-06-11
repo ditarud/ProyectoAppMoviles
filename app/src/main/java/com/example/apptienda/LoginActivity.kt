@@ -43,7 +43,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun goToRegisterActivity(){
-        registerButton.setOnClickListener {
+        goToRegisterFormButton.setOnClickListener {
             startActivityForResult(
                 Intent(this, RegisterActivity::class.java),
                 RequestCode.GO_TO_REGISTER_FROM_LOGIN_ACTIVITY.value)

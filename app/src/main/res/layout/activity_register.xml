@@ -17,8 +17,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintVertical_chainStyle="packed"
             android:gravity="center_horizontal"
-            android:text="Register for Shop App"
-            android:textSize="25dp"
+            android:text="@string/title"
+            android:textSize="25sp"
             android:textStyle="bold"
             android:maxWidth="200dp" />
 
@@ -34,10 +34,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintVertical_chainStyle="packed"
-            android:layout_marginRight="180dp"
-            android:gravity="center_horizontal"
-            android:layout_marginTop="80dp"
-            android:text="Nombre"
+            android:layout_marginTop="130dp"
+            android:text="@string/userNameText"
              />
 
     <EditText
@@ -50,7 +48,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintVertical_chainStyle="packed"
             android:gravity="center_horizontal"
-            android:hint="Diego"
+            android:inputType="text"
             android:maxWidth="200dp"   />
 
 
@@ -66,7 +64,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintVertical_chainStyle="packed"
             android:layout_marginTop="70dp"
-            android:text="Password"
+            android:text="@string/passwordText"
             />
 
     <EditText
@@ -79,6 +77,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintVertical_chainStyle="packed"
             android:gravity="center_horizontal"
+            android:inputType="textPassword"
             android:maxWidth="200dp"   />
 
 
@@ -94,7 +93,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintVertical_chainStyle="packed"
             android:layout_marginTop="70dp"
-            android:text="Email"    />
+            android:text="@string/emailText"    />
 
     <EditText
             android:id="@+id/emailEditText"
@@ -105,7 +104,92 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintVertical_chainStyle="packed"
             android:gravity="center_horizontal"
+            android:inputType="textEmailAddress"
             android:maxWidth="200dp"   />
+
+
+    <TextView
+            android:id="@+id/genderTextView"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/radioGroup"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintVertical_chainStyle="packed"
+            android:layout_marginTop="70dp"
+            android:text="@string/genderText"    />
+
+
+
+
+    <RadioGroup
+            android:id="@+id/radioGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@id/emailEditText"
+                android:layout_marginTop="30dp"
+                android:gravity="center_horizontal">
+
+
+
+        <RadioButton android:id="@+id/radioMale"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     app:layout_constraintStart_toStartOf="@id/radioFemale"
+                     app:layout_constraintEnd_toEndOf="parent"
+                     android:layout_marginRight="30dp"
+                     android:text="@string/maleText"/>
+
+        <RadioButton android:id="@+id/radioFemale"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+
+                     app:layout_constraintStart_toStartOf="@id/radioMale"
+                     app:layout_constraintEnd_toEndOf="parent"
+                     android:text="@string/femaleText"/>
+    </RadioGroup>
+
+
+    <TextView
+            android:id="@+id/addressTextView"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/radioGroup"
+            app:layout_constraintBottom_toTopOf="@+id/addressEditText"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintVertical_chainStyle="packed"
+            android:text="@string/addressText"    />
+
+    <EditText
+            android:id="@+id/addressEditText"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/addressTextView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintVertical_chainStyle="packed"
+            android:gravity="center_horizontal"
+            android:inputType="text"
+            android:maxWidth="200dp"
+            android:hint="La Gloria 45, depto 54"/>
+
+
+
+
+    <Button
+            android:id="@+id/registerButton"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/addressTextView"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/registerButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintVertical_chainStyle="packed"
+            android:layout_marginTop="40dp"
+            android:text="@string/confirmButton"/>
+
 
 
 
