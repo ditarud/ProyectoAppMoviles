@@ -22,6 +22,12 @@
     <string name="addressText">Address</string>
     <string name="confirmButton">Confirm</string>
 
+    <!-- PRODUCT DETAIL ACTIVITY -->
+    <string name="buyButton">Buy!</string>
+    <string name="paymentTitle">Payment Method</string>
+    <string name="cashText">Cash</string>
+    <string name="transferText">Transfer</string>
+
 
     <!-- NAVIGATION DRAWER -->
     <string name="navigation_drawer_home">Home</string>

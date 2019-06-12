@@ -3,6 +3,7 @@ package com.example.apptienda
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.text.TextUtils
 import android.util.Log
 import android.widget.Toast
 import com.example.apptienda.db.AppDatabase
@@ -23,12 +24,17 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun setListeners() {
         registerButton.setOnClickListener {
-            createUser()
-            finish()
 
+            if (  TextUtils.isEmpty(userNameEditText.text) || TextUtils.isEmpty(lastNameEditText.text) || TextUtils.isEmpty(addressEditText.text)
+                || TextUtils.isEmpty(emailEditText.text) || TextUtils.isEmpty(passwordEditText.text) || TextUtils.isEmpty(userNameEditText.text)) {
+                Toast.makeText(applicationContext, "Fields should not be empty", Toast.LENGTH_SHORT).show()
+
+            } else {
+                createUser()
+                finish()
+            }
         }
     }
-
 
     private fun createUser() {
         val userObject = createUserObject()
@@ -54,6 +60,7 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun createUserObject(): User {
+
         val name = userNameEditText.text.toString()
         val lastName = lastNameEditText.text.toString()
         val address = addressEditText.text.toString()
