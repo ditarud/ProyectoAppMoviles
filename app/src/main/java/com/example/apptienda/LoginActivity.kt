@@ -15,7 +15,9 @@ import kotlinx.coroutines.launch
 class LoginActivity : AppCompatActivity() {
 
     var userEmailDB = ""
+    var userId = 0
     val userList: MutableList<String> = ArrayList()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,6 +25,10 @@ class LoginActivity : AppCompatActivity() {
         checkUserExist()
         setListeners()
         goToRegisterActivity()
+    }
+
+    companion object {
+        var actualEmail = ""
     }
 
 
@@ -55,6 +61,7 @@ class LoginActivity : AppCompatActivity() {
                     Toast.makeText(this, R.string.passwordError, Toast.LENGTH_LONG).show()
                 // Go to MainActivity
                 else -> {
+                    actualEmail = userEmail
                     // Add data to invoking intent
                     intent.apply {
                         putExtra("EMAIL", userEmail)

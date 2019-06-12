@@ -12,6 +12,7 @@ interface OrderDao {
     @Query("SELECT * FROM orders WHERE user_id LIKE :user")
     fun getUserOrder(user: Int): List<Order>
 
+
     @Insert(onConflict = OnConflictStrategy.FAIL)
     fun insert(order: Order)
 

@@ -33,6 +33,7 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.apply {
             setDisplayHomeAsUpEnabled(true)
             setHomeAsUpIndicator(R.drawable.ic_menu_black_24dp)
+            toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
         }
         setupNavViewListener()
     }

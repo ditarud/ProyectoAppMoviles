@@ -19,7 +19,7 @@
     <string name="genderText">Gender</string>
     <string name="maleText">Male</string>
     <string name="femaleText">Female</string>
-    <string name="addressText">Female</string>
+    <string name="addressText">Address</string>
     <string name="confirmButton">Confirm</string>
 
 
