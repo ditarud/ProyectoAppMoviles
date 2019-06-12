@@ -8,7 +8,7 @@ import android.widget.BaseAdapter
 import android.widget.TextView
 import com.example.apptienda.db.models.Order
 import com.example.apptienda.R
-
+import com.example.apptienda.db.models.Product
 
 
 class ShoppingHistoryAdapter (
@@ -35,6 +35,7 @@ class ShoppingHistoryAdapter (
         val rowView = inflater.inflate(R.layout.list_item_shopping_history, parent, false)
         rowView.findViewById<TextView>(R.id.orderDateTextView).text = dataSource[position].date
         rowView.findViewById<TextView>(R.id.orderPaymentTextView).text = dataSource[position].payment
+
 
 
         return rowView

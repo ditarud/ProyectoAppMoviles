@@ -1,6 +1,7 @@
 package com.example.apptienda.Fragments
 
 import android.content.Context
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -18,8 +19,10 @@ import kotlinx.coroutines.launch
 
 
 import com.example.apptienda.Adapters.ProductAdapter
+import com.example.apptienda.ProductDetailActivity
 import com.example.apptienda.db.models.Product
 import kotlinx.android.synthetic.main.fragment_products.*
+import kotlinx.android.synthetic.main.fragment_shopping_history.*
 import java.lang.Exception
 
 
@@ -37,7 +40,7 @@ class ProductsFragment : Fragment() {
 
 
         loadProducts()
-        //setListOnClickListeners()
+        setListOnClickListeners()
     }
 
     private fun loadProducts(){
@@ -72,7 +75,12 @@ class ProductsFragment : Fragment() {
     }
 
     private fun setListOnClickListeners(){
-
+        productsListView.setOnItemClickListener { _, _, position, _ ->
+            val selectedProduct = (productsListView.adapter).getItem(position) as Product
+            startActivity(
+                Intent(context, ProductDetailActivity::class.java).
+                    putExtra("PRODUCT_ID", selectedProduct.id))
+        }
     }
 
     private fun createProductObject(): Product{

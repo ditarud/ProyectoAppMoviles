@@ -15,6 +15,9 @@ interface ProductDao {
     @Query("SELECT * FROM products")
     fun getAll(): List<Product>
 
+    @Query("SELECT * FROM products WHERE id LIKE :id")
+    fun getProduct(id: Int): Product?
+
     @Insert(onConflict = OnConflictStrategy.FAIL)
     fun insert(product: Product)
 
