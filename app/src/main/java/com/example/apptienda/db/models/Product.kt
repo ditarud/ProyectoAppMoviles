@@ -8,9 +8,9 @@ import android.support.annotation.NonNull
 @Entity(tableName = "products")
 data class Product(
     @NonNull @ColumnInfo(name = "name") val name: String?,
-    @NonNull @ColumnInfo(name = "price") val price: Integer?,
-    @NonNull @ColumnInfo(name = "description") val description: Boolean?,
-    @NonNull @ColumnInfo(name = "stock") val stock: Integer?,
+    @NonNull @ColumnInfo(name = "price") val price: Int?,
+    @NonNull @ColumnInfo(name = "description") val description: String?,
+    @NonNull @ColumnInfo(name = "stock") val stock: Int?,
     @NonNull @ColumnInfo(name = "deleted") val deleted: Boolean?
 ) {
     @PrimaryKey(autoGenerate=true) var id: Int = 0

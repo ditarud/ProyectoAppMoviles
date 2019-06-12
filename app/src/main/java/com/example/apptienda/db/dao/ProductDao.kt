@@ -2,6 +2,7 @@ package com.example.apptienda.db.dao
 
 import android.arch.persistence.room.Dao
 import android.arch.persistence.room.Insert
+import android.arch.persistence.room.OnConflictStrategy
 import android.arch.persistence.room.Query
 import com.example.apptienda.db.models.User
 import com.example.apptienda.db.models.Order
@@ -13,13 +14,9 @@ import com.example.apptienda.db.models.ProductOrder
 interface ProductDao {
     @Query("SELECT * FROM products")
     fun getAll(): List<Product>
-//
-//    @Query("SELECT * FROM user WHERE uid IN (:userIds)")
-//    fun loadAllByIds(userIds: IntArray): List<User>
-//
-//    @Query("SELECT * FROM user WHERE first_name LIKE :first AND " +
-//            "last_name LIKE :last LIMIT 1")
-//    fun findByName(first: String, last: String): User
+
+    @Insert(onConflict = OnConflictStrategy.FAIL)
+    fun insert(product: Product)
 
     @Insert
     fun insertAll(vararg product: Product)
