@@ -34,6 +34,8 @@ class ShoppingHistoryAdapter (
         // Get view for row item
         val rowView = inflater.inflate(R.layout.list_item_shopping_history, parent, false)
         rowView.findViewById<TextView>(R.id.orderDateTextView).text = dataSource[position].date
+        rowView.findViewById<TextView>(R.id.orderPaymentTextView).text = dataSource[position].payment
+
 
         return rowView
     }

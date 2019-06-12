@@ -15,7 +15,6 @@ import kotlinx.coroutines.launch
 class LoginActivity : AppCompatActivity() {
 
     var userEmailDB = ""
-    var userId = 0
     val userList: MutableList<String> = ArrayList()
 
 
@@ -39,11 +38,10 @@ class LoginActivity : AppCompatActivity() {
             for (i in 0..AppDatabase.getDatabase(applicationContext).userDao().getAllUser().count() - 1) {
                 userEmailDB = AppDatabase.getDatabase(applicationContext).userDao().getAllUser()[i].email.toString()
                 userList.add(userEmailDB)
-
             }
         }
-        return userList
 
+        return userList
     }
 
     private fun setListeners() {

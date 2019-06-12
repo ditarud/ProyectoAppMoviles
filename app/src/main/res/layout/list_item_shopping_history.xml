@@ -58,6 +58,14 @@
                         android:layout_below="@+id/orderDateTextView"
                 />
 
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/orderPaymentTextView"
+                        android:layout_toEndOf="@+id/productPhotoImageView"
+                        android:layout_below="@+id/amountPaidTextView"
+                />
+
             </RelativeLayout>
 
         </android.support.v7.widget.CardView>

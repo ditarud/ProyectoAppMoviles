@@ -24,6 +24,7 @@
 
 
     <!-- NAVIGATION DRAWER -->
+    <string name="navigation_drawer_home">Home</string>
     <string name="navigation_drawer_products">Products</string>
     <string name="navigation_drawer_my_profile">My Profile</string>
     <string name="navigation_drawer_shopping_history">Shopping History</string>
