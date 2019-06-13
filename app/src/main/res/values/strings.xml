@@ -7,6 +7,7 @@
     <string name="loginButtonText">Sign In</string>
     <string name="registerButtonText">Register</string>
     <string name="emailError">Invalid Email</string>
+    <string name="emailExist">Email Exists</string>
     <string name="passwordError">Empty Password</string>
     <string name="titleWelcome">Welcome!</string>
 

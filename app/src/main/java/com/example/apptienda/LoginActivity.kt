@@ -15,7 +15,9 @@ import kotlinx.coroutines.launch
 class LoginActivity : AppCompatActivity() {
 
     var userEmailDB = ""
+    var userPasswordDB = ""
     val userList: MutableList<String> = ArrayList()
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,6 +26,13 @@ class LoginActivity : AppCompatActivity() {
         checkUserExist()
         setListeners()
         goToRegisterActivity()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        checkUserExist()
+        setListeners()
+
     }
 
     companion object {
@@ -44,17 +53,34 @@ class LoginActivity : AppCompatActivity() {
         return userList
     }
 
+    private fun checkUserPassword(userEmail: String) : String{
+        if (userEmail != "" && EmailValidator.isValidEmail(userEmail) )  {
+
+            GlobalScope.launch(Dispatchers.IO) {
+                // replaces doAsync (runs on another thread)
+                userPasswordDB = AppDatabase.getDatabase(applicationContext).userDao().getUser(userEmail)!!.password.toString()
+            }
+        }
+
+
+        return userPasswordDB
+    }
+
     private fun setListeners() {
+
         loginButton.setOnClickListener {
             val userEmail = emailEdit.text.toString()
             val userPassword = passwordEditText.text.toString()
+            checkUserPassword(userEmail)
             when {
                 // Check Email
                 !EmailValidator.isValidEmail(userEmail)  ->
                     Toast.makeText(this, R.string.emailError, Toast.LENGTH_LONG).show()
                 userEmail  !in checkUserExist() ->
-                    Toast.makeText(this, "Usuario no registrado", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, "User not registered", Toast.LENGTH_LONG).show()
                 // Check Password
+                userPassword != checkUserPassword(userEmail) ->
+                    Toast.makeText(this, "Password doesn't match", Toast.LENGTH_LONG).show()
                 userPassword.isNullOrEmpty() ->
                     Toast.makeText(this, R.string.passwordError, Toast.LENGTH_LONG).show()
                 // Go to MainActivity
@@ -78,6 +104,7 @@ class LoginActivity : AppCompatActivity() {
             startActivityForResult(
                 Intent(this, RegisterActivity::class.java),
                 RequestCode.GO_TO_REGISTER_FROM_LOGIN_ACTIVITY.value)
+
         }
     }
 

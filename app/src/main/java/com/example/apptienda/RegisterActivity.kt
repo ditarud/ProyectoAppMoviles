@@ -16,25 +16,59 @@ import java.lang.Exception
 
 class RegisterActivity : AppCompatActivity() {
 
+    val userList: MutableList<String> = ArrayList()
+    var userEmailDB = ""
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
+        checkUserExist()
         setListeners()
     }
 
     private fun setListeners() {
         registerButton.setOnClickListener {
 
-            if (  TextUtils.isEmpty(userNameEditText.text) || TextUtils.isEmpty(lastNameEditText.text) || TextUtils.isEmpty(addressEditText.text)
-                || TextUtils.isEmpty(emailEditText.text) || TextUtils.isEmpty(passwordEditText.text) || TextUtils.isEmpty(userNameEditText.text)) {
+            if (TextUtils.isEmpty(userNameEditText.text) || TextUtils.isEmpty(lastNameEditText.text) || TextUtils.isEmpty(
+                    addressEditText.text
+                )
+                || TextUtils.isEmpty(emailEditText.text) || TextUtils.isEmpty(passwordEditText.text) || TextUtils.isEmpty(
+                    userNameEditText.text
+                )
+            ) {
                 Toast.makeText(applicationContext, "Fields should not be empty", Toast.LENGTH_SHORT).show()
+
+            } else if (!EmailValidator.isValidEmail(emailEditText.text.toString())) {
+
+                Toast.makeText(this, R.string.emailError, Toast.LENGTH_LONG).show()
+
+            } else if (emailEditText.text.toString() in checkUserExist()) {
+                Toast.makeText(this, R.string.emailExist, Toast.LENGTH_LONG).show()
 
             } else {
                 createUser()
-                finish()
+                startActivityForResult(
+                    Intent(this, MainActivity::class.java),
+                    RequestCode.GO_TO_REGISTER_FROM_LOGIN_ACTIVITY.value)
+
             }
         }
     }
+
+
+    private fun checkUserExist() : MutableList<String>{
+        GlobalScope.launch(Dispatchers.IO) {
+            // replaces doAsync (runs on another thread)
+            for (i in 0..AppDatabase.getDatabase(applicationContext).userDao().getAllUser().count() - 1) {
+                userEmailDB = AppDatabase.getDatabase(applicationContext).userDao().getAllUser()[i].email.toString()
+                userList.add(userEmailDB)
+            }
+        }
+
+        return userList
+    }
+
 
     private fun createUser() {
         val userObject = createUserObject()
