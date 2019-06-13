@@ -71,7 +71,7 @@ class LoginActivity : AppCompatActivity() {
         loginButton.setOnClickListener {
             val userEmail = emailEdit.text.toString()
             val userPassword = passwordEditText.text.toString()
-            checkUserPassword(userEmail)
+
             when {
                 // Check Email
                 !EmailValidator.isValidEmail(userEmail)  ->
