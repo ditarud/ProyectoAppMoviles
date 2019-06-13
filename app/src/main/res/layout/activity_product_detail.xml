@@ -41,7 +41,7 @@
                 android:layout_marginTop="92dp"
                 android:gravity="center_horizontal"
                 android:scaleType="fitCenter"
-                android:alpha="0.15"
+                android:alpha="0.85"
                 android:src="@drawable/android_camera1"
         />
 

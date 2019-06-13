@@ -11,10 +11,13 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import android.widget.Toast
 import android.content.DialogInterface
+import android.graphics.BitmapFactory
+import android.net.Uri
 import android.support.v7.app.AlertDialog
 import android.util.Log
 import android.widget.RadioButton
 import com.example.apptienda.db.models.Order
+import com.example.apptienda.db.models.ProductImage
 import com.example.apptienda.db.models.ProductOrder
 import kotlinx.android.synthetic.main.activity_product_detail.radioGroup
 import kotlinx.android.synthetic.main.activity_register.*
@@ -29,6 +32,7 @@ class ProductDetailActivity : AppCompatActivity() {
 
     private var currentProductId: Int = 0
     private var productPhoto: String = ""
+    private var imgFinal: ProductImage? = null
     var actualUserId = 0
     var random = 0
 
@@ -65,6 +69,7 @@ class ProductDetailActivity : AppCompatActivity() {
             val appDatabase = AppDatabase.getDatabase(baseContext)
             val productDao = appDatabase.productDao()
             val selectedProduct = productDao.getProduct(currentProductId)
+            val img = appDatabase.productImageDao()
 
 
 
@@ -74,13 +79,22 @@ class ProductDetailActivity : AppCompatActivity() {
                 descriptionTextView.text = selectedProduct!!.description
                 priceTextView.text = "$" + selectedProduct!!.price.toString()
 
+                //set
 
-
-
-
-              //  val photoUri = selectedProduct.photoUri
+                GlobalScope.launch(Dispatchers.IO) {
+                    imgFinal = img.getProductImage(selectedProduct.id)
+                    launch(Dispatchers.Main) {
+                        if (imgFinal != null) {
+                            val path = imgFinal!!.path
+                            imagePlaceholder.setImageBitmap(BitmapFactory.decodeFile(path))
+                        } else {
+                            imagePlaceholder.setImageResource(R.drawable.no_image)
+                        }
+                    }
+                }
+                //val photoUri = selectedProduct.photoUri
                 // A post sent to the view in order for it to wait until the view has been rendered (draw)
-             //   imagePlaceholder.post {
+                //imagePlaceholder.post {
              //       if (!selectedProduct.photoUri.isNullOrBlank())
              //           setPic(photoUri!!)
              //   }
