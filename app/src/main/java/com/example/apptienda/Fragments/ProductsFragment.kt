@@ -87,7 +87,7 @@ class ProductsFragment : Fragment() {
         val name = "Example"
         val price = 1000
         val description = "the very first product"
-        val stock = 1000
+        val stock = 3
         val deleted = false
         return Product(name, price, description, stock, deleted)
     }

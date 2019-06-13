@@ -35,52 +35,16 @@ class ShoppingHistoryFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //productNameTextView.text = "Computador 1"
-       // orderDateTextView.text = "2019-10-12"
-       // amountPaidTextView.text = "$23.000"
-       // productPhotoImageView.setImageResource(R.mipmap.ic_launcher)
+
 
     }
 
     override fun onStart() {
         super.onStart()
-        createOrder()
         loadOrders()
     }
 
-    private fun createOrder() {
-        GlobalScope.launch(Dispatchers.IO) {
-            actualUserId = AppDatabase.getDatabase(context!!).userDao().getUser(LoginActivity.actualEmail)!!.id
-            val orderObject = createOrderObject(actualUserId)
-            saveData(orderObject)
-        }
-    }
 
-    private fun createOrderObject(actualUserId : Int): Order {
-        val date = "12-10-2019"
-        val payment = "Transferencia"
-
-        return Order(actualUserId, date, payment)
-    }
-
-    // ESTO SOLO SE HACE ACÁ YA QUE NO SE PUEDE GENERAR UNA ORDEN ( COMPRAR AUN NO SE IMPLEMENTA)
-    private fun saveData(order: Order){
-
-        val orderDao = AppDatabase.getDatabase(context!!).orderDao()
-        GlobalScope.launch(Dispatchers.IO) {  // replaces doAsync (runs on another thread)
-            try {
-                orderDao.insert(order)
-                launch(Dispatchers.Main) {
-                    Toast.makeText(context!!, "Saved Order successfully", Toast.LENGTH_SHORT).show()
-                }
-            } catch (e: Exception) {
-                launch(Dispatchers.Main) {
-                    Log.d("ERROR", "Error storing order ${e.message}")
-                    Toast.makeText(context!!, "Error storing order ${e.message}" , Toast.LENGTH_LONG).show()
-                }
-            }
-        }
-    }
 
 
     private fun loadOrders() {
@@ -89,7 +53,7 @@ class ShoppingHistoryFragment : Fragment() {
 
             actualUserId = AppDatabase.getDatabase(context!!).userDao().getUser(LoginActivity.actualEmail)!!.id
 
-            val orders = orderDao.getUserOrder(actualUserId)
+            val orders = orderDao.getAllUserOrder(actualUserId)
             launch(Dispatchers.Main) {// replaces uiThread (runs on UIThread)
                 val itemsAdapter = ShoppingHistoryAdapter(context!!, ArrayList(orders))
                 orderListView.adapter = itemsAdapter

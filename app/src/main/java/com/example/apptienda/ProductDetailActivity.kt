@@ -12,22 +12,36 @@ import kotlinx.coroutines.launch
 import android.widget.Toast
 import android.content.DialogInterface
 import android.support.v7.app.AlertDialog
+import android.util.Log
 import android.widget.RadioButton
+import com.example.apptienda.db.models.Order
+import com.example.apptienda.db.models.ProductOrder
 import kotlinx.android.synthetic.main.activity_product_detail.radioGroup
 import kotlinx.android.synthetic.main.activity_register.*
+import kotlinx.android.synthetic.main.list_item_shopping_history.*
+import java.lang.Exception
+import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.util.*
 
 
 class ProductDetailActivity : AppCompatActivity() {
 
     private var currentProductId: Int = 0
     private var productPhoto: String = ""
-
+    var actualUserId = 0
+    var random = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_product_detail)
         getCurrentProductValues()
+
     }
+    companion object {
+        var actualUserIdGlobal = 0
+    }
+
 
 
 
@@ -100,7 +114,11 @@ class ProductDetailActivity : AppCompatActivity() {
             builder.setCancelable(false)
             builder.setPositiveButton("Yes",
                 DialogInterface.OnClickListener { dialog, which ->
+                    createOrder()
 
+                    val intent = Intent(applicationContext, SummaryOrderActivity::class.java)
+                    startActivity(intent)
+                    finish()
                 })
 
             builder.setNegativeButton("No",
@@ -114,6 +132,78 @@ class ProductDetailActivity : AppCompatActivity() {
         }
 
 
+    }
+
+
+
+    private fun createOrder() {
+        GlobalScope.launch(Dispatchers.IO) {
+            actualUserId = AppDatabase.getDatabase(applicationContext).userDao().getUser(LoginActivity.actualEmail)!!.id
+            actualUserIdGlobal = actualUserId
+            val orderObject = createOrderObject(actualUserId)
+            val productOrderObject = createProductOrderObject(actualUserId,currentProductId)
+            saveOrderData(orderObject)
+            saveProductOrderData(productOrderObject)
+        }
+    }
+
+
+
+    private fun createOrderObject(actualUserId : Int): Order {
+        val radio: RadioButton = findViewById(radioGroup.checkedRadioButtonId)
+
+        val dateFormatter = SimpleDateFormat("dd-MM-yyyy hh:mm")
+        dateFormatter.setLenient(false)
+        val today = Date()
+
+        val date = dateFormatter.format(today)
+        random = (1000..3000).random()
+        val number = random.toString()
+        val payment = radio.text.toString()
+
+        return Order(actualUserId, date, number, payment)
+    }
+
+    private fun createProductOrderObject(actualUserId: Int, productId: Int): ProductOrder{
+        val amount = 1
+        return  ProductOrder(productId, actualUserId, amount)
+
+    }
+
+    // ESTO SOLO SE HACE ACÁ YA QUE NO SE PUEDE GENERAR UNA ORDEN ( COMPRAR AUN NO SE IMPLEMENTA)
+    private fun saveOrderData(order: Order){
+
+        val orderDao = AppDatabase.getDatabase(this).orderDao()
+        GlobalScope.launch(Dispatchers.IO) {  // replaces doAsync (runs on another thread)
+            try {
+                orderDao.insert(order)
+                launch(Dispatchers.Main) {
+                    Toast.makeText(applicationContext, "Saved Order successfully", Toast.LENGTH_SHORT).show()
+                }
+            } catch (e: Exception) {
+                launch(Dispatchers.Main) {
+                    Log.d("ERROR", "Error storing order ${e.message}")
+                    Toast.makeText(applicationContext!!, "Error storing order ${e.message}" , Toast.LENGTH_LONG).show()
+                }
+            }
+        }
+    }
+
+    private fun saveProductOrderData(productOrderObject: ProductOrder) {
+        val productOrderDao = AppDatabase.getDatabase(this).productOrderDao()
+        GlobalScope.launch(Dispatchers.IO) {  // replaces doAsync (runs on another thread)
+            try {
+                productOrderDao.insert(productOrderObject)
+                launch(Dispatchers.Main) {
+                    Toast.makeText(applicationContext, "Saved Product Order successfully", Toast.LENGTH_SHORT).show()
+                }
+            } catch (e: Exception) {
+                launch(Dispatchers.Main) {
+                    Log.d("ERROR", "Error storing order ${e.message}")
+                    Toast.makeText(applicationContext!!, "Error storing order ${e.message}" , Toast.LENGTH_LONG).show()
+                }
+            }
+        }
     }
 
 }

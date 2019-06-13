@@ -34,6 +34,8 @@ class ProductAdapter(
         rowView.findViewById<TextView>(R.id.nameTextView).text = dataSource[position].name
         rowView.findViewById<TextView>(R.id.priceTextView).text = (dataSource[position].price).toString()
         rowView.findViewById<TextView>(R.id.descriptionTextView).text = dataSource[position].description
+        rowView.findViewById<TextView>(R.id.stockTextView).text = dataSource[position].stock.toString()
+
         return rowView
     }
 }

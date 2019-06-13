@@ -19,9 +19,9 @@ import android.support.annotation.NonNull
         onDelete = CASCADE)
 ])
 data class ProductOrder(
-    @NonNull @ColumnInfo(name = "product_id") val product_id: Integer?,
-    @NonNull @ColumnInfo(name = "order_id") val order_id: Integer?,
-    @NonNull @ColumnInfo(name = "amount") val amount: Integer?
+    @NonNull @ColumnInfo(name = "product_id") val product_id: Int?,
+    @NonNull @ColumnInfo(name = "order_id") val order_id: Int?,
+    @NonNull @ColumnInfo(name = "amount") val amount: Int?
 ) {
     @PrimaryKey(autoGenerate=true) var id: Int = 0
 }

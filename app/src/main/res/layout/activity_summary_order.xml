@@ -7,4 +7,62 @@
         android:layout_height="match_parent"
         tools:context=".SummaryOrderActivity">
 
+
+    <TextView
+            android:id="@+id/titleSummaryOrderTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:text="@string/titleOrder"
+            android:textSize="30dp"
+            android:textStyle="bold"
+            android:layout_marginTop="40dp"
+
+        />
+
+    <TextView
+            android:id="@+id/orderNumberTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/titleSummaryOrderTextView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:textStyle="bold"
+            android:textSize="18dp"
+
+    />
+
+    <TextView
+            android:id="@+id/instructionsTitleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/orderNumberTextView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:text="@string/instructions"
+            android:layout_marginTop="40dp"
+            android:textSize="18dp"
+
+    />
+
+
+
+    <TextView
+            android:id="@+id/instructionsTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/instructionsTitleTextView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="40dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+
+    />
+
+
+
+
 </android.support.constraint.ConstraintLayout>

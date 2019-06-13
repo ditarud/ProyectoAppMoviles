@@ -28,6 +28,11 @@
     <string name="cashText">Cash</string>
     <string name="transferText">Transfer</string>
 
+    <!-- SUMMARY ORDER ACTIVITY -->
+    <string name="titleOrder">Order Created!</string>
+    <string name="transferData">Data for Transfer</string>
+    <string name="instructions">Instructions</string>
+
 
     <!-- NAVIGATION DRAWER -->
     <string name="navigation_drawer_home">Home</string>
@@ -39,10 +44,10 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!-- ACTION BAR -->
+    <string name="action_bar_home">Products</string>
     <string name="action_bar_products_title">Products</string>
     <string name="action_bar_my_profile_title">My Profile</string>
     <string name="action_bar_shopping_history_title">Shopping History</string>
-    <string name="action_bar_others_complaints_title">Others Complaints</string>
-    <string name="action_bar_complaints_summary_title">Complaints Summary</string>
+
 
 </resources>

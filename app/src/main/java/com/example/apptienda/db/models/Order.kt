@@ -16,6 +16,7 @@ import android.support.annotation.NonNull
 data class Order(
     @NonNull @ColumnInfo(name = "user_id") val user_id: Int?,
     @NonNull @ColumnInfo(name = "date") val date: String?,
+    @NonNull @ColumnInfo(name = "code") val code: String?,
     @NonNull @ColumnInfo(name = "payment") val payment: String?
 ) {
     @PrimaryKey(autoGenerate=true) var id: Int = 0
