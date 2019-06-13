@@ -52,6 +52,7 @@ class ProductsFragment : Fragment() {
                 try {
                     val firstp = createProductObject()
                     totalProducts.insert(firstp)
+                    totalProducts.insert(createProductObject2())
                     launch(Dispatchers.Main) {
                         Toast.makeText(context!!, "Saved successfully the product", Toast.LENGTH_SHORT).show()
                     }
@@ -82,7 +83,7 @@ class ProductsFragment : Fragment() {
                     putExtra("PRODUCT_ID", selectedProduct.id))
         }
     }
-
+    //creador de productos primitivo no definitivo
     private fun createProductObject(): Product{
         val name = "Example"
         val price = 1000
@@ -92,6 +93,14 @@ class ProductsFragment : Fragment() {
         return Product(name, price, description, stock, deleted)
     }
 
+    private fun createProductObject2(): Product{
+        val name = "Example2"
+        val price = 67
+        val description = "the very second product"
+        val stock = 12
+        val deleted = false
+        return Product(name, price, description, stock, deleted)
+    }
 
 
 }
