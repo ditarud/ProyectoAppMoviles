@@ -32,11 +32,7 @@ class MainActivity : AppCompatActivity() {
         checkAdminExist()
         goToLoginActivity()
 
-
-
     }
-
-
 
     private fun initializeHome() {
         val transaction = supportFragmentManager.beginTransaction()
@@ -159,6 +155,8 @@ class MainActivity : AppCompatActivity() {
                     } else {
                         transaction.replace(R.id.contentFrameLayout, UserFragment(), "userFragment")
                     }
+                    supportActionBar!!.title = getString(R.string.action_bar_users)
+
                 }
 
                 R.id.signOut -> {
@@ -212,14 +210,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setEmail(bundle: Bundle){
-
-            val userEmail = bundle.getString("EMAIL")!!
-            val userPassword = bundle.getString("PASSWORD")!!
+        val userEmail = bundle.getString("EMAIL")!!
+        val userPassword = bundle.getString("PASSWORD")!!
         loggedAsTextView.text = "Logged as: " + userEmail
     }
 
    fun onSignOut() {
-
         goToLoginActivity()
 
     }

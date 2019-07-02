@@ -50,6 +50,7 @@
     <string name="navigation_drawer_products">Products</string>
     <string name="navigation_drawer_my_profile">My Profile</string>
     <string name="navigation_drawer_shopping_history">Shopping History</string>
+    <string name="navigation_drawer_delete_user">Delete User</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -59,7 +60,9 @@
     <string name="action_bar_products_title">Products</string>
     <string name="action_bar_my_profile_title">My Profile</string>
     <string name="action_bar_shopping_history_title">Shopping History</string>
-    <string name="navigation_drawer_delete_user">Delete User</string>
+    <string name="action_bar_users">Users </string>
+
+
 
 
 </resources>
