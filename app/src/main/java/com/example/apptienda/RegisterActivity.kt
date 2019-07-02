@@ -20,12 +20,14 @@ class RegisterActivity : AppCompatActivity() {
     var userEmailDB = ""
 
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
         checkUserExist()
         setListeners()
     }
+
 
     private fun setListeners() {
         registerButton.setOnClickListener {

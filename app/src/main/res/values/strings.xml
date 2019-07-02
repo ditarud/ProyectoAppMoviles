@@ -28,6 +28,16 @@
     <string name="paymentTitle">Payment Method</string>
     <string name="cashText">Cash</string>
     <string name="transferText">Transfer</string>
+    <string name="stockTitle">Stock:</string>
+
+    <!-- CREATE PRODUCT  ACTIVITY -->
+    <string name="productName">Product Name</string>
+    <string name="productPrice">Price</string>
+    <string name="productDescription">Description</string>
+    <string name="productStock">Stock</string>
+    <string name="createProduct">Create Product!</string>
+    <string name="titleActivity">Product Creation</string>
+
 
     <!-- SUMMARY ORDER ACTIVITY -->
     <string name="titleOrder">Order Created!</string>
@@ -49,6 +59,7 @@
     <string name="action_bar_products_title">Products</string>
     <string name="action_bar_my_profile_title">My Profile</string>
     <string name="action_bar_shopping_history_title">Shopping History</string>
+    <string name="navigation_drawer_delete_user">Delete User</string>
 
 
 </resources>

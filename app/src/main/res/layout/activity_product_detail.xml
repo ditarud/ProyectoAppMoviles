@@ -8,6 +8,33 @@
         tools:context=".ProductDetailActivity">
 
 
+        <ImageButton
+                android:id="@+id/editProductButton"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/priceTextView"
+                app:layout_constraintEnd_toEndOf="@id/deleteProductButton"
+                android:layout_marginEnd="40dp"
+                android:layout_marginTop="35dp"
+                android:src="@drawable/edit_black_18dp"
+                app:layout_constraintVertical_bias="0.958"/>
+
+        <ImageButton
+                android:id="@+id/deleteProductButton"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/priceTextView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="35dp"
+                android:src="@drawable/baseline_delete_black_18dp"
+
+
+                app:layout_constraintVertical_bias="0.976" app:layout_constraintHorizontal_bias="1.0"/>
+
         <TextView
                 android:id="@+id/nameTextView"
                 android:layout_width="wrap_content"
@@ -38,7 +65,7 @@
                 app:layout_constraintTop_toBottomOf="@id/nameTextView"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="92dp"
+                android:layout_marginTop="72dp"
                 android:gravity="center_horizontal"
                 android:scaleType="fitCenter"
                 android:alpha="0.85"
@@ -54,18 +81,21 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 android:textStyle="italic"
-                android:gravity="center" android:layout_marginTop="72dp"
+                android:maxLines="6"
+                android:gravity="center" android:layout_marginTop="20dp"
                 />
 
         <TextView
-                android:id="@+id/genderTextView"
+                android:id="@+id/paymentTextView"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toTopOf="@+id/radioGroup"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintVertical_chainStyle="packed"
+                android:gravity="center_horizontal"
                 android:layout_marginTop="70dp"
+                android:textStyle="bold"
                 android:text="@string/paymentTitle"    />
 
         <RadioGroup
@@ -97,21 +127,39 @@
         </RadioGroup>
 
 
+        <TextView
+                android:id="@+id/stockTitleTextView"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toTopOf="@+id/buyButton"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintVertical_chainStyle="packed"
+                android:layout_marginBottom="8dp"
+                android:textStyle="bold"
+                android:text="@string/stockTitle"/>
+
+        <TextView
+                android:id="@+id/stockTextView"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toTopOf="@+id/buyButton"
+                app:layout_constraintStart_toEndOf="@id/buyButton"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintVertical_chainStyle="packed"
+                android:layout_marginBottom="8dp"
+                android:textStyle="bold"
+                app:layout_constraintHorizontal_bias="0.386"/>
+
         <Button
                 android:id="@+id/buyButton"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/descriptionTextView"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintVertical_chainStyle="packed"
-                android:layout_marginTop="40dp"
+                android:layout_marginBottom="10dp"
                 android:text="@string/buyButton"/>
-
-
-
-
 
 
 </android.support.constraint.ConstraintLayout>

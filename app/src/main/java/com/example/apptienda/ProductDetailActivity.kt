@@ -11,10 +11,13 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import android.widget.Toast
 import android.content.DialogInterface
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Matrix
 import android.net.Uri
 import android.support.v7.app.AlertDialog
 import android.util.Log
+import android.view.View
 import android.widget.RadioButton
 import com.example.apptienda.db.models.Order
 import com.example.apptienda.db.models.ProductImage
@@ -40,6 +43,8 @@ class ProductDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_product_detail)
         getCurrentProductValues()
+        editProductListener()
+        deleteProductListener()
 
     }
     companion object {
@@ -47,15 +52,56 @@ class ProductDetailActivity : AppCompatActivity() {
     }
 
 
-
-
     override fun onResume() {
         super.onResume()
         setViewContent()
+        GlobalScope.launch(Dispatchers.IO) {
+            if (LoginActivity.admin == true) {
+                buyButton.visibility = View.GONE
+            }
+            else {
+                editProductButton.visibility = View.GONE
+                deleteProductButton.visibility = View.GONE
+            }
+        }
         buyButton.setOnClickListener {
             confirmDialogDemo()
         }
+    }
 
+    private fun deleteProductListener() {
+        deleteProductButton.setOnClickListener {
+            deleteDialogDemo()
+        }
+    }
+
+
+    private fun editProductListener(){
+        editProductButton.setOnClickListener {
+            val intent =  Intent(this, CreateProductActivity::class.java)
+            intent.putExtra("PRODUCT_ID", currentProductId)
+            startActivity(intent)
+        }
+    }
+
+    private fun deleteProduct(productId: Int) {
+        val totalProducts = AppDatabase.getDatabase(this).productDao()
+        GlobalScope.launch(Dispatchers.IO) {  // replaces doAsync (runs on another thread)
+            try {
+
+                totalProducts.delete(productId)
+                launch(Dispatchers.Main) {
+                    Toast.makeText(applicationContext, "Deleted successfully the product", Toast.LENGTH_SHORT).show()
+                    finish()
+                }
+            } catch (e: Exception) {
+                launch(Dispatchers.Main) {
+                    Log.d("ERROR", "Error storing product ${e.message}")
+                    Toast.makeText(applicationContext, "Error deleted  products ${e.message}" , Toast.LENGTH_LONG).show()
+                }
+            }
+
+        }
     }
 
     private fun getCurrentProductValues() {
@@ -72,35 +118,64 @@ class ProductDetailActivity : AppCompatActivity() {
             val img = appDatabase.productImageDao()
 
 
-
-
             launch(Dispatchers.Main) {
                 nameTextView.text = selectedProduct!!.name
                 descriptionTextView.text = selectedProduct!!.description
                 priceTextView.text = "$" + selectedProduct!!.price.toString()
-
+                stockTextView.text = selectedProduct!!.stock.toString()
+                val imgFinal = selectedProduct.photo
                 //set
 
                 GlobalScope.launch(Dispatchers.IO) {
-                    imgFinal = img.getProductImage(selectedProduct.id)
+                    //imgFinal = img.getProductImage(selectedProduct.id)
+
                     launch(Dispatchers.Main) {
                         if (imgFinal != null) {
-                            val path = imgFinal!!.path
-                            imagePlaceholder.setImageBitmap(BitmapFactory.decodeFile(path))
+                            val path = imgFinal!!
+                            setPic(imgFinal)
                         } else {
                             imagePlaceholder.setImageResource(R.drawable.no_image)
                         }
                     }
                 }
-                //val photoUri = selectedProduct.photoUri
-                // A post sent to the view in order for it to wait until the view has been rendered (draw)
-                //imagePlaceholder.post {
-             //       if (!selectedProduct.photoUri.isNullOrBlank())
-             //           setPic(photoUri!!)
-             //   }
-
             }
         }
+    }
+
+    private fun setPic(imagePath: String) {
+        // Get the dimensions of the View
+        imagePlaceholder.setPadding(0, 0, 0, 0)
+        val targetW: Int = imagePlaceholder.width
+        val targetH: Int = imagePlaceholder.height
+
+        val bmOptions = BitmapFactory.Options().apply {
+            // Get the dimensions of the bitmap
+            inJustDecodeBounds = true
+            BitmapFactory.decodeFile(imagePath, this)
+            val photoW: Int = outWidth
+            val photoH: Int = outHeight
+
+            // Determine how much to scale down the image
+            val scaleFactor: Int = Math.min(photoW / targetW, photoH / targetH)
+
+            // Decode the image file into a Bitmap sized to fill the View
+            inJustDecodeBounds = false
+            inSampleSize = scaleFactor
+        }
+        BitmapFactory.decodeFile(imagePath, bmOptions)?.also { bitmap ->
+            val correctedBitmap = rotate(bitmap,90F)
+            imagePlaceholder.setImageBitmap(correctedBitmap)
+        }
+    }
+
+    private fun rotate(bitmap: Bitmap, degree: Float): Bitmap {
+        val w = bitmap.width
+        val h = bitmap.height
+
+        val mtx = Matrix()
+        mtx.postRotate(degree)
+
+        return Bitmap.createBitmap(bitmap, 0, 0, w, h, mtx, true)
     }
 
     private fun alertDialogDemo() {
@@ -117,8 +192,6 @@ class ProductDetailActivity : AppCompatActivity() {
     }
 
     private fun confirmDialogDemo() {
-
-
         if (radioGroup.checkedRadioButtonId != -1) {
             val radio: RadioButton = findViewById(radioGroup.checkedRadioButtonId)
             val builder = AlertDialog.Builder(this)
@@ -144,11 +217,24 @@ class ProductDetailActivity : AppCompatActivity() {
         } else {
             alertDialogDemo()
         }
-
-
     }
 
 
+    private fun deleteDialogDemo() {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Delete confirmation !")
+        builder.setMessage("Are you sure delete this product ?")
+        builder.setCancelable(false)
+        builder.setPositiveButton("Yes",
+            DialogInterface.OnClickListener { dialog, which ->
+                deleteProduct(currentProductId)
+            })
+        builder.setNegativeButton("No",
+            DialogInterface.OnClickListener { dialog, which ->
+
+            })
+        builder.show()
+    }
 
     private fun createOrder() {
         GlobalScope.launch(Dispatchers.IO) {

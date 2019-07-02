@@ -11,6 +11,7 @@ data class Product(
     @NonNull @ColumnInfo(name = "price") val price: Int?,
     @NonNull @ColumnInfo(name = "description") val description: String?,
     @NonNull @ColumnInfo(name = "stock") val stock: Int?,
+    @NonNull @ColumnInfo(name = "photo") val photo: String?,
     @NonNull @ColumnInfo(name = "deleted") val deleted: Boolean?
 ) {
     @PrimaryKey(autoGenerate=true) var id: Int = 0

@@ -12,6 +12,9 @@ interface OrderDao {
     @Query("SELECT * FROM orders WHERE user_id LIKE :user")
     fun getAllUserOrder(user: Int): List<Order>
 
+    @Query("SELECT * FROM orders")
+    fun getAllOrders(): List<Order>
+
     @Query("SELECT * FROM orders WHERE user_id LIKE :user")
     fun getUserOrder(user: Int): Order?
 

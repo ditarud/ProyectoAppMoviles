@@ -1,9 +1,6 @@
 package com.example.apptienda.db.dao
 
-import android.arch.persistence.room.Dao
-import android.arch.persistence.room.Insert
-import android.arch.persistence.room.OnConflictStrategy
-import android.arch.persistence.room.Query
+import android.arch.persistence.room.*
 import com.example.apptienda.db.models.User
 import com.example.apptienda.db.models.Order
 import com.example.apptienda.db.models.Product
@@ -24,6 +21,9 @@ interface ProductDao {
     @Insert
     fun insertAll(vararg product: Product)
 
-//    @Delete
-//    fun delete(user: User)
+    @Query("UPDATE products SET name= :name, price= :price, description= :description, stock= :stock, photo= :photo WHERE id = :id")
+    fun update(id: Int, name: String, price :Int, description :String, stock :Int, photo :String)
+
+    @Query("DELETE FROM products WHERE id = :id")
+    fun delete(id: Int)
 }

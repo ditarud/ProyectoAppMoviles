@@ -14,7 +14,7 @@ import android.support.annotation.NonNull
         onDelete = CASCADE)
 ])
 data class ProductImage(
-    @NonNull @ColumnInfo(name = "product_id") val product_id: Integer?,
+    @NonNull @ColumnInfo(name = "product_id") val product_id: Int?,
     @NonNull @ColumnInfo(name = "path") val path: String?
 ) {
     @PrimaryKey(autoGenerate=true) var id: Int = 0

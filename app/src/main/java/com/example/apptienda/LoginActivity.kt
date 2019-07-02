@@ -37,7 +37,10 @@ class LoginActivity : AppCompatActivity() {
 
     companion object {
         var actualEmail = ""
+        var admin: Boolean? = false
     }
+
+
 
 
 
@@ -59,10 +62,10 @@ class LoginActivity : AppCompatActivity() {
             GlobalScope.launch(Dispatchers.IO) {
                 // replaces doAsync (runs on another thread)
                 userPasswordDB = AppDatabase.getDatabase(applicationContext).userDao().getUser(userEmail)!!.password.toString()
+                admin = AppDatabase.getDatabase(applicationContext).userDao().getUser(userEmail)!!.role
+
             }
         }
-
-
         return userPasswordDB
     }
 

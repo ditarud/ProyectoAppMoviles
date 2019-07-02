@@ -36,6 +36,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_marginLeft="300dp"
                 android:textSize="10dp"
+                android:textColor="@color/colorFontToolbar"
 
 
         />
