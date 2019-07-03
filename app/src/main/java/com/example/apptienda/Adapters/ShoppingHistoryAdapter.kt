@@ -6,11 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
-import com.example.apptienda.LoginActivity
 import com.example.apptienda.db.models.Order
 import com.example.apptienda.R
-import com.example.apptienda.db.AppDatabase
-import com.example.apptienda.db.models.Product
 
 
 class ShoppingHistoryAdapter (
@@ -39,7 +36,7 @@ class ShoppingHistoryAdapter (
         rowView.findViewById<TextView>(R.id.orderDateTextView).text = dataSource[position].date
         rowView.findViewById<TextView>(R.id.orderPaymentTextView).text = dataSource[position].payment
         rowView.findViewById<TextView>(R.id.orderCodeTextView).text = "Order: " + dataSource[position].code
-        //rowView.findViewById<TextView>(R.id.productNameTextView).text = "Product Name: " + dataSource2[position].name
+        rowView.findViewById<TextView>(R.id.productNameTextView).text = "Product Name: " + dataSource[position].name
 
 
 

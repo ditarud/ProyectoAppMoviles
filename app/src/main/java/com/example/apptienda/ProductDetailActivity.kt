@@ -37,6 +37,7 @@ class ProductDetailActivity : AppCompatActivity() {
     private var productPhoto: String = ""
     private var imgFinal: ProductImage? = null
     var actualUserId = 0
+    var orId = 0
     var random = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -241,8 +242,9 @@ class ProductDetailActivity : AppCompatActivity() {
             actualUserId = AppDatabase.getDatabase(applicationContext).userDao().getUser(LoginActivity.actualEmail)!!.id
             actualUserIdGlobal = actualUserId
             val orderObject = createOrderObject(actualUserId)
-            val productOrderObject = createProductOrderObject(actualUserId,currentProductId)
             saveOrderData(orderObject)
+            orId = AppDatabase.getDatabase(applicationContext).orderDao().getLast()!!.id
+            val productOrderObject = createProductOrderObject(orId, currentProductId)
             saveProductOrderData(productOrderObject)
         }
     }
@@ -261,12 +263,12 @@ class ProductDetailActivity : AppCompatActivity() {
         val number = random.toString()
         val payment = radio.text.toString()
 
-        return Order(actualUserId, date, number, payment)
+        return Order(actualUserId, date, number, payment, null)
     }
 
-    private fun createProductOrderObject(actualUserId: Int, productId: Int): ProductOrder{
+    private fun createProductOrderObject(orderId: Int, productId: Int): ProductOrder{
         val amount = 1
-        return  ProductOrder(productId, actualUserId, amount)
+        return  ProductOrder(productId, orderId, amount)
 
     }
 

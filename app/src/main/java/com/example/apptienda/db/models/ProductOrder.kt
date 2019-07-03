@@ -5,13 +5,14 @@ import android.arch.persistence.room.Entity
 import android.arch.persistence.room.PrimaryKey
 import android.arch.persistence.room.ForeignKey
 import android.arch.persistence.room.ForeignKey.CASCADE
+import android.arch.persistence.room.ForeignKey.SET_NULL
 import android.support.annotation.NonNull
 
 @Entity(tableName = "productorders", foreignKeys = [
         ForeignKey(entity = Product::class,
         parentColumns = arrayOf("id"),
         childColumns = arrayOf("product_id"),
-        onDelete = CASCADE),
+        onDelete = SET_NULL),
 
         ForeignKey(entity = Order::class,
         parentColumns = arrayOf("id"),
